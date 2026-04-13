@@ -1,0 +1,1511 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{natbib}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{xcolor}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{openquestion}{Open Question}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\newcommand{\SU}{\mathrm{SU}(2)}
+\newcommand{\Real}{\operatorname{Re}}
+\newcommand{\Imag}{\operatorname{Im}}
+\newcommand{\Hq}{\mathbb{H}}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  citecolor=green!40!black,
+  urlcolor=blue!60!black
+}
+
+\title{Toward a Non-Commutative Residuated Lattice\\
+from Quaternion Multiplication}
+
+\author{J.~Arturo Ornelas Brand\\
+\small Independent Researcher, Aguascalientes, M\'exico\\
+\small \texttt{arturoornelas62@gmail.com}}
+
+\date{Draft --- \today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+The quaternionic G-lattice introduced in the companion paper uses
+component-wise min as its monoidal operation, making the residuated
+lattice a product of four independent chains. The quaternionic structure
+of the framework manifests in the $\SU$ group action and the product on
+$S^3$, but not in the logic's conjunction. This paper investigates
+whether the Hamilton product of quaternions can serve as a genuinely
+non-commutative conjunction---a monoidal operation that couples the four
+epistemic axes through the quaternionic cross terms.
+
+We establish positive results: the Hamilton product on
+$V = [0,1] \times [-1,1]^3$ satisfies bilateral identity, bilateral
+annihilation, and associativity; it defines left and right implications
+via quaternionic division, both satisfying modus ponens; and under every
+commutative restriction (Boolean, fuzzy, modal), the two implications
+coincide and the product reduces to the standard commutative t-norm.
+Non-commutativity is proven to be \emph{emergent}: it arises only in the
+full four-dimensional space, not in any proper restriction.
+
+We also characterize fundamental obstructions. The Hamilton product
+is not closed on $V$ and is not monotone with respect to the
+component-wise order. We prove that no total order on $\Hq$ is
+compatible with Hamilton multiplication, that the component-wise
+lattice order and the Hamilton monoid cannot coexist on $V$, and---via
+four independent impossibility results---that no non-trivial lattice
+order on $B^4 = \{q \in \Hq : |q| \leq 1\}$ is compatible with the
+Hamilton monoid. The four results are: (i)~no proper bi-invariant cone
+exists in $\Hq$ (SU(2) transitivity), (ii)~no non-trivial
+bi-invariant partial order exists on $Q_8$ (exhaustive closure),
+(iii)~no real-dominant subcone is closed under multiplication
+(analytical bound), and (iv)~the norm order collapses the structure to
+a one-dimensional product BL-algebra.
+
+These results culminate in a \textbf{quaternionic trilemma}: for any
+monoidal operation on a subset of $V = [0,1] \times [-1,1]^3$, at
+most two of \{associativity, non-commutativity, compatible lattice
+order\} can hold simultaneously. The trilemma is a \emph{theorem}
+for $V$-domains (Theorem~\ref{thm:trilemma-V}): De Moivre's theorem
+shows that every non-real element's iterates eventually exit $V$, so
+the only sub-monoids of $V$ under Hamilton product are commutative.
+For the full ball $B^4$, where powers remain bounded but the
+angular argument fails, Theorem~\ref{thm:trilemma-B4} proves that
+the canonical non-commutative sub-monoid (equal-norm generators)
+admits no compatible lattice order. The equal-norm hypothesis is
+sharp: for generators of unequal norm, compatible monotone lattice
+orders exist (Remark~\ref{rem:sharpness}).
+
+An $\alpha$-parameterized family interpolates between the diagonal
+product ($\alpha = 0$) and the full Hamilton product ($\alpha = 1$),
+preserving all specializations; associativity holds only at the
+endpoints.
+\end{abstract}
+
+\noindent\textbf{Keywords:} non-commutative residuated lattice;
+quaternion multiplication; t-norm; substructural logic; fuzzy logic;
+Hamilton product; non-commutative conjunction
+
+%======================================================================
+\section{Introduction}
+\label{sec:intro}
+%======================================================================
+
+The quaternionic logic developed in \citet{p11} assigns to each
+semantic state a four-dimensional coordinate
+$(r, i, j, k) \in V = [0,1] \times [-1,1]^3$, where $r$ encodes
+crystallised truth, $i$ encodes potentiality, $j$ encodes
+verifiability, and $k$ encodes recursive selection. Logical connectives
+form a bounded residuated lattice on $V$, and an $\SU$ group acts by
+conjugation, yielding a G-lattice whose central result is a commutation
+theorem: connectives commute with the group action if and only if they
+depend exclusively on the real component.
+
+The lattice connectives---AND~$= \min$, OR~$= \max$, and the G\"odel
+residuum---are defined component-wise. The resulting lattice is
+isomorphic to the product of four independent chains
+\citep[Remark~5]{p11}. The quaternionic structure manifests in the group
+action and the product on $S^3$, but not in the conjunction itself.
+
+This is a structural limitation. In the four-dimensional space, the
+Hamilton product couples all four components: the relation
+$ij = k$ (potentiality composed with verification yields selection) is a
+cross-term that no component-wise operation can reproduce. If the
+conjunction were the Hamilton product rather than component-wise min, the
+logic would be genuinely non-commutative---the order of premises would
+matter, as in Lambek calculus \citep{lambek1958} and substructural
+logics \citep{restall2000}.
+
+This paper investigates whether such a construction is possible. The
+question is: \emph{can a residuated lattice be built on $V$ whose
+monoidal operation derives from quaternion multiplication?}
+
+The answer is: partially. We establish the monoid and its residuals,
+characterize the obstructions to the full lattice, and map the path
+forward.
+
+\paragraph{Contributions.}
+\begin{enumerate}[nosep]
+\item The Hamilton product on $V$ satisfies bilateral identity,
+  bilateral annihilation, and associativity
+  (Theorem~\ref{thm:monoid-properties}).
+\item Two obstructions are characterized: failure of closure
+  (Theorem~\ref{thm:closure-failure}) and failure of monotonicity
+  (Theorem~\ref{thm:monotonicity-failure}), both traced to the signed
+  structure of the quaternionic cross terms.
+\item The unit ball $B^4$ resolves closure
+  (Proposition~\ref{prop:ball-monoid}).
+\item Left and right implications via quaternionic division satisfy modus
+  ponens, tautology, and non-commutativity
+  (Theorem~\ref{thm:implications}).
+\item Under every commutative restriction (Boolean, fuzzy, modal), the
+  two implications coincide and the product reduces to the standard
+  t-norm (Theorem~\ref{thm:specialization}).
+\item Non-commutativity is emergent: it arises only in the full 4D
+  space (Theorem~\ref{thm:emergence}).
+\item No total order on $\Hq$ is compatible with Hamilton multiplication
+  (Proposition~\ref{prop:no-total-order}).
+\item Six independent impossibility results rule out every natural
+  candidate for a compatible lattice order on $B^4$: no bi-invariant
+  cone (Theorem~\ref{thm:cone-impossibility}), no bi-invariant order
+  on $Q_8$ (Theorem~\ref{thm:q8-impossibility}), no closed
+  real-dominant subcone (Proposition~\ref{prop:subcone}),
+  norm-order collapse to one dimension
+  (Proposition~\ref{prop:norm-collapse}), component-wise
+  incompatibility (Theorem~\ref{thm:order-incompatibility}), and
+  sphere exclusion for integral RLs
+  (Proposition~\ref{prop:sphere-exclusion}).
+\item The \textbf{quaternionic trilemma}, proved for $V$-domains
+  (Theorem~\ref{thm:trilemma-V}) via angular accumulation
+  (Theorem~\ref{thm:angular}): at most two of \{associativity,
+  non-commutativity, compatible lattice order\} hold simultaneously.
+  Proved for the canonical $B^4$ sub-monoid with equal-norm
+  generators (Theorem~\ref{thm:trilemma-B4}); the equal-norm
+  condition is sharp (Remark~\ref{rem:sharpness}).
+\item An $\alpha$-parameterized family bridges the commutative and
+  non-commutative regimes, with associativity only at the endpoints
+  (Proposition~\ref{prop:alpha}).
+\end{enumerate}
+
+%======================================================================
+\section{Preliminaries}
+\label{sec:prelim}
+%======================================================================
+
+\subsection{Quaternion algebra}
+
+The quaternion algebra $\Hq$ is the four-dimensional real algebra
+spanned by $\{1, i, j, k\}$ with $i^2 = j^2 = k^2 = ijk = -1$.
+Every quaternion $q = a + bi + cj + dk$ has real part $\Real(q) = a$,
+imaginary part $\Imag(q) = (b, c, d)$, conjugate
+$\bar{q} = a - bi - cj - dk$, and norm
+$|q| = \sqrt{a^2 + b^2 + c^2 + d^2}$. The norm is multiplicative:
+$|q_1 q_2| = |q_1| \cdot |q_2|$.
+
+\subsection{Hamilton product}
+
+For $q_1 = (r_1, i_1, j_1, k_1)$ and $q_2 = (r_2, i_2, j_2, k_2)$,
+the Hamilton product is:
+\begin{equation}
+\label{eq:hamilton}
+q_1 \cdot q_2 = \begin{pmatrix}
+  r_1 r_2 - i_1 i_2 - j_1 j_2 - k_1 k_2 \\
+  r_1 i_2 + i_1 r_2 + j_1 k_2 - k_1 j_2 \\
+  r_1 j_2 - i_1 k_2 + j_1 r_2 + k_1 i_2 \\
+  r_1 k_2 + i_1 j_2 - j_1 i_2 + k_1 r_2
+\end{pmatrix}
+\end{equation}
+The product is associative, has identity $1 = (1, 0, 0, 0)$, and every
+nonzero quaternion has an inverse $q^{-1} = \bar{q}/|q|^2$.
+
+\subsection{Non-commutative residuated lattices}
+
+A \emph{residuated lattice} \citep{galatos2007} is an algebra
+$(L, \wedge, \vee, \cdot, \backslash, /, e)$ where $(L, \wedge, \vee)$
+is a lattice, $(L, \cdot, e)$ is a monoid, and the \emph{residuation
+law} holds:
+\begin{equation}
+\label{eq:residuation}
+a \cdot b \leq c
+  \quad\Longleftrightarrow\quad
+  a \leq c / b
+  \quad\Longleftrightarrow\quad
+  b \leq a \backslash c
+\end{equation}
+where $\backslash$ is the left residual and $/$ is the right residual.
+When $\cdot$ is commutative, the two residuals coincide and we write
+$a \to b$.
+
+In the commutative case, the monoidal operation $\cdot$ is a t-norm:
+a binary operation on $[0,1]$ that is commutative, associative,
+monotone, and has identity~$1$. The G\"odel t-norm ($\min$), the product
+t-norm ($a \cdot b$), and the {\L}ukasiewicz t-norm
+($\max(0, a + b - 1)$) are the three basic t-norms
+\citep{hajek1998,esteva2001}. The companion paper \citet{p11} uses
+$\min$ on each component, yielding a product of four G\"odel chains.
+
+Non-commutative extensions were introduced by
+\citet{hajek2003} (pseudo-BL algebras) and studied extensively by
+\citet{ciungu2006} and \citet{galatos2007}. The key difference from the
+commutative case is the existence of \emph{two} residuals, corresponding
+to left and right division.
+
+\subsection{Quaternionic fuzzy sets}
+
+\citet{dai2023} introduced quaternion-valued membership functions for
+fuzzy sets, defining intersection and union via component-wise min and
+max. However, Dai's construction does not define a t-norm, residuum, or
+any inference mechanism---it remains at the level of set operations.
+
+%======================================================================
+\section{The Hamilton Product as Conjunction}
+\label{sec:conjunction}
+%======================================================================
+
+We examine which properties of a monoidal operation the Hamilton product
+satisfies on $V = [0,1] \times [-1,1]^3$.
+
+\begin{theorem}[Monoid-like properties]
+\label{thm:monoid-properties}
+The Hamilton product on $V$ satisfies:
+\begin{enumerate}[nosep]
+\item \textbf{Bilateral identity}: $q \cdot \mathbf{1} = \mathbf{1} \cdot q = q$
+  for all $q \in V$, where $\mathbf{1} = (1, 0, 0, 0)$.
+\item \textbf{Bilateral annihilation}: $q \cdot \mathbf{0} = \mathbf{0} \cdot q = \mathbf{0}$
+  for all $q \in V$, where $\mathbf{0} = (0, 0, 0, 0)$.
+\item \textbf{Associativity}: $(q_1 \cdot q_2) \cdot q_3 = q_1 \cdot (q_2 \cdot q_3)$
+  for all $q_1, q_2, q_3 \in V$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1)~From \eqref{eq:hamilton} with $q_2 = (1, 0, 0, 0)$: the real-times-real
+term gives $r_1$, all cross terms vanish. The calculation is symmetric.
+
+(2)~Every term in \eqref{eq:hamilton} contains a factor from $q_2$; if
+$q_2 = \mathbf{0}$, all terms vanish. By symmetry of the bilinear
+structure.
+
+(3)~This is the associativity of the quaternion algebra $\Hq$, which
+holds for all quaternions, not just those in $V$.
+\end{proof}
+
+The Hamilton product also satisfies the basis relations that give it
+semantic content:
+
+\begin{proposition}[Basis relations]
+\label{prop:basis}
+The pure basis quaternions satisfy:
+\begin{alignat}{3}
+  i \cdot j &= k,  &\qquad j \cdot i &= -k, \label{eq:ij} \\
+  j \cdot k &= i,  &\qquad k \cdot j &= -i, \label{eq:jk} \\
+  k \cdot i &= j,  &\qquad i \cdot k &= -j, \label{eq:ki} \\
+  i^2 &= j^2 = k^2 &&= -\mathbf{1}. \label{eq:squares}
+\end{alignat}
+\end{proposition}
+
+\begin{remark}[Semantic reading]
+The non-commutativity $ij = k \neq ji = -k$ has a direct semantic
+interpretation: \emph{imagining first, then verifying} ($ij = k$:
+selection) produces a different result from \emph{verifying first, then
+imagining} ($ji = -k$: anti-selection). The order of epistemic
+operations matters. This is the algebraic signature of the distinction
+between hypothesis generation (imagine, then test) and falsification
+(test, then reimagine).
+\end{remark}
+
+However, two critical properties fail:
+
+\begin{theorem}[Closure failure]
+\label{thm:closure-failure}
+The Hamilton product is not closed on $V = [0,1] \times [-1,1]^3$.
+Specifically, for $q_1, q_2 \in V$ with $\Imag(q_1) \neq 0$ and
+$\Imag(q_2) \neq 0$:
+\begin{equation}
+\Real(q_1 \cdot q_2) = r_1 r_2 - (i_1 i_2 + j_1 j_2 + k_1 k_2)
+\end{equation}
+which can be negative (violating $r \in [0,1]$) when
+$\langle \Imag(q_1), \Imag(q_2) \rangle > r_1 r_2$.
+\end{theorem}
+
+\begin{proof}
+Take $q_1 = (0.1, 0.8, 0, 0)$ and $q_2 = (0.1, 0.8, 0, 0)$.
+Then $\Real(q_1 \cdot q_2) = 0.01 - 0.64 = -0.63 < 0$. Thus
+$q_1 \cdot q_2 \notin V$.
+\end{proof}
+
+\begin{theorem}[Monotonicity failure]
+\label{thm:monotonicity-failure}
+The Hamilton product is not monotone with respect to the component-wise
+order on $V$. That is, there exist $a, b, c \in V$ with $b \leq c$
+(component-wise) but $a \cdot b \not\leq a \cdot c$.
+\end{theorem}
+
+\begin{proof}
+The signed cross terms in \eqref{eq:hamilton} are the source. Consider
+the real component of $a \cdot b$:
+\[
+(a \cdot b)_r = a_r b_r - a_i b_i - a_j b_j - a_k b_k
+\]
+Increasing $b_i$ while holding all else fixed \emph{decreases} the
+real component of the product (due to the $-a_i b_i$ term). But in
+the component-wise order, increasing $b_i$ means $b' \geq b$. So
+$(a \cdot b')_r < (a \cdot b)_r$ while $b' \geq b$: left-monotonicity
+fails on the real component.
+
+Explicitly: let $a = (0.5, 0.5, 0, 0)$, $b = (0.5, 0.1, 0, 0)$,
+$c = (0.5, 0.9, 0, 0)$. Then $b \leq c$ component-wise, but
+$(a \cdot b)_r = 0.25 - 0.05 = 0.20$ while
+$(a \cdot c)_r = 0.25 - 0.45 = -0.20$. So $a \cdot b > a \cdot c$
+on the real component.
+\end{proof}
+
+\begin{remark}[The fundamental obstruction]
+\label{rem:obstruction}
+Both failures---closure and monotonicity---trace to the same algebraic
+source: the \textbf{signed cross terms} in the Hamilton product. The
+real component formula
+$r_1 r_2 - \langle \Imag(q_1), \Imag(q_2) \rangle$ contains a
+subtraction of the imaginary dot product. In a standard (commutative)
+t-norm on $[0,1]$, all terms are positive, ensuring closure and
+monotonicity. In the Hamilton product, the cross terms introduce
+\emph{negative contributions} that can dominate the positive diagonal
+terms. This is not a defect---it is the algebraic mechanism that
+produces non-commutativity and axis coupling ($ij = k$)---but it is
+incompatible with a positively-ordered bounded domain.
+\end{remark}
+
+%======================================================================
+\section{The Unit Ball Monoid}
+\label{sec:ball}
+%======================================================================
+
+The closure failure on $V$ can be resolved by working on the unit ball.
+
+\begin{proposition}[Unit ball monoid]
+\label{prop:ball-monoid}
+The set $B^4 = \{q \in \Hq : |q| \leq 1\}$ with the Hamilton product
+forms a monoid:
+\begin{enumerate}[nosep]
+\item \textbf{Closure}: If $|q_1| \leq 1$ and $|q_2| \leq 1$, then
+  $|q_1 \cdot q_2| = |q_1| \cdot |q_2| \leq 1$.
+\item \textbf{Associativity}: Inherited from $\Hq$.
+\item \textbf{Identity}: $\mathbf{1} = (1, 0, 0, 0)$ with $|\mathbf{1}| = 1 \in B^4$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Closure follows from the multiplicativity of the quaternion norm.
+\end{proof}
+
+\begin{remark}[Relation to $V$]
+The domain $V = [0,1] \times [-1,1]^3$ and the unit ball $B^4$ are
+different subsets of $\Hq$. Their intersection
+$V \cap B^4 = \{q \in V : |q| \leq 1\}$ is nonempty and contains
+$\mathbf{0}$ and $\mathbf{1}$. The unit ball $B^4$ is closed under
+the Hamilton product; $V$ is not. However, $B^4$ is not closed under
+the lattice operations $\min$ and $\max$ (component-wise max of two
+elements in $B^4$ can leave $B^4$), so the lattice and monoid
+structures live on incompatible domains. This domain incompatibility
+is the geometric face of the algebraic obstruction identified in
+Remark~\ref{rem:obstruction}.
+\end{remark}
+
+The unit ball monoid admits left and right division:
+
+\begin{proposition}[Division on $B^4$]
+\label{prop:division}
+For $a \in B^4$ with $a \neq \mathbf{0}$:
+\begin{align}
+  a^{-1} &= \bar{a}\,/\,|a|^2 \label{eq:inv} \\
+  a \backslash b &= a^{-1} \cdot b \quad\text{(left division)} \label{eq:ldiv} \\
+  b / a &= b \cdot a^{-1} \quad\text{(right division)} \label{eq:rdiv}
+\end{align}
+Left division satisfies $a \cdot (a \backslash b) = b$ and right
+division satisfies $(b / a) \cdot a = b$.
+\end{proposition}
+
+\begin{proof}
+By associativity: $a \cdot (a^{-1} \cdot b) = (a \cdot a^{-1}) \cdot b = b$.
+Similarly for the right division.
+\end{proof}
+
+\begin{remark}[Division leaves $B^4$]
+\label{rem:div-leaves}
+For $a, b \in B^4$ with $|a| < |b|$, the division $a \backslash b$ has
+norm $|b|/|a| > 1$, so $a \backslash b \notin B^4$. This means the
+residuals of the Hamilton product, defined as suprema via the
+residuation law~\eqref{eq:residuation}, do not stay within $B^4$ in
+general. A truncation $\min(1, |b|/|a|)$ applied to the norm is the
+natural remedy---analogous to the $\min(1, b/a)$ in the product
+t-norm's residuum on $[0,1]$---but it breaks the exact adjunction
+property. Remark~\ref{rem:residuation-norm} characterises the
+scope of this limitation.
+\end{remark}
+
+%======================================================================
+\section{Two Implications from Non-Commutativity}
+\label{sec:implications}
+%======================================================================
+
+The non-commutativity of the Hamilton product gives rise to two distinct
+implication operators, corresponding to left and right division. We
+study their properties on $\Hq \setminus \{0\}$ (the natural domain
+where division is defined).
+
+\begin{definition}[Left and right implications]
+\label{def:implications}
+For $a, b \in \Hq$ with $a \neq \mathbf{0}$:
+\begin{align}
+  a \to_L b &= a^{-1} \cdot b \quad\text{(left implication)} \\
+  a \to_R b &= b \cdot a^{-1} \quad\text{(right implication)}
+\end{align}
+\end{definition}
+
+\begin{theorem}[Properties of quaternionic implications]
+\label{thm:implications}
+Both implications satisfy:
+\begin{enumerate}[nosep]
+\item \textbf{Tautology}: $a \to_L a = a \to_R a = \mathbf{1}$ for all
+  $a \neq \mathbf{0}$.
+\item \textbf{Modus ponens (left)}: $a \cdot (a \to_L b) = b$.
+\item \textbf{Modus ponens (right)}: $(a \to_R b) \cdot a = b$.
+\item \textbf{Non-commutativity}: $a \to_L b \neq a \to_R b$ in general.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1)~$a^{-1} \cdot a = \mathbf{1}$ and $a \cdot a^{-1} = \mathbf{1}$.
+
+(2)~$a \cdot (a^{-1} \cdot b) = (a a^{-1}) \cdot b = b$ by
+associativity.
+
+(3)~$(b \cdot a^{-1}) \cdot a = b \cdot (a^{-1} a) = b$ by
+associativity.
+
+(4)~$a^{-1} b \neq b a^{-1}$ whenever $a^{-1}$ and $b$ do not commute.
+For example, $i \to_L j = i^{-1} \cdot j = (-i) \cdot j = -k$,
+while $i \to_R j = j \cdot i^{-1} = j \cdot (-i) = k$. The left
+and right implications differ by sign on the $k$ axis.
+\end{proof}
+
+\begin{remark}[Semantic reading of the two implications]
+The left implication $a \to_L b = a^{-1} b$ asks: ``given $a$ as
+premise, what must I compose on the right to reach $b$?'' The right
+implication $a \to_R b = b a^{-1}$ asks: ``what must I compose on the
+left to reach $b$, given $a$ as premise?'' In epistemic terms: the left
+implication assumes the premise acts first (and asks what follows); the
+right implication assumes the conclusion is the target (and asks what
+precedes). The two coincide when the order of operations does not
+matter---i.e., when the product is commutative.
+\end{remark}
+
+\begin{proposition}[Contraposition]
+\label{prop:contraposition}
+Classical contraposition ($a \to b \iff \neg b \to \neg a$) does
+\emph{not} hold for the quaternionic implications. With conjugation as
+negation ($\neg q = \bar{q}$):
+\begin{equation}
+a \to_L b = a^{-1} b
+  \quad\neq\quad
+  \bar{b} \to_L \bar{a} = \bar{b}^{-1} \bar{a}
+\end{equation}
+in general.
+\end{proposition}
+
+\begin{proof}
+$a^{-1} b = \bar{a} b / |a|^2$ while
+$\bar{b}^{-1} \bar{a} = b \bar{a} / |b|^2$. These are equal only when
+$|a| = |b|$ and $\bar{a} b = b \bar{a}$, which fails generically.
+\end{proof}
+
+%======================================================================
+\section{Specialization Recovery}
+\label{sec:specialization}
+%======================================================================
+
+A construction on the full four-dimensional space must reduce to known
+logics under the appropriate restrictions. We verify this for the
+Hamilton product.
+
+\begin{theorem}[Specialization and commutativity]
+\label{thm:specialization}
+Under each of the following restrictions, the Hamilton product becomes
+commutative and reduces to a standard t-norm, and the two implications
+coincide:
+\begin{enumerate}[nosep]
+\item \textbf{Boolean} ($i = j = k = 0$, $r \in \{0, 1\}$):
+  The product is $r_1 \cdot r_2$ (multiplication in $\{0,1\}$), which
+  is Boolean AND.
+\item \textbf{Fuzzy} ($i = j = k = 0$, $r \in [0,1]$):
+  The product is $r_1 \cdot r_2$ (the product t-norm
+  $T_{\mathrm{prod}}$).
+\item \textbf{Modal} ($j = k = 0$, $r, i \in [0,1]$):
+  The product is $(r_1 r_2 - i_1 i_2, \; r_1 i_2 + i_1 r_2, \; 0,
+  \; 0)$, which is complex multiplication restricted to the first
+  quadrant. This is commutative.
+\end{enumerate}
+In each case, the Hamilton cross terms involving $j$ and $k$ vanish,
+eliminating the source of non-commutativity.
+\end{theorem}
+
+\begin{proof}
+(1)~With $i_1 = j_1 = k_1 = i_2 = j_2 = k_2 = 0$,
+equation~\eqref{eq:hamilton} gives $(r_1 r_2, 0, 0, 0)$.
+
+(2)~Same calculation with $r_1, r_2 \in [0,1]$.
+
+(3)~With $j_1 = k_1 = j_2 = k_2 = 0$, the cross terms
+$j_1 k_2 - k_1 j_2 = 0$, $k_1 i_2 - i_1 k_2 = 0$, and
+$i_1 j_2 - j_1 i_2 = 0$ all vanish. The remaining product is
+$(r_1 r_2 - i_1 i_2, \; r_1 i_2 + i_1 r_2, \; 0, \; 0)$, which is
+the multiplication of complex numbers $z_1 = r_1 + i_1 \cdot i$ and
+$z_2 = r_2 + i_2 \cdot i$. Complex multiplication is commutative.
+\end{proof}
+
+\begin{corollary}[Implications coincide under restriction]
+\label{cor:imp-coincide}
+Under any of the three restrictions above, $a \to_L b = a \to_R b$ for
+all $a, b$ in the restricted domain.
+\end{corollary}
+
+\begin{proof}
+Commutativity implies $a^{-1} b = b a^{-1}$.
+\end{proof}
+
+\begin{remark}[Where non-commutativity begins]
+The minimal restriction that produces non-commutativity requires at
+least two distinct imaginary axes to be active. Specifically, the
+cross terms in~\eqref{eq:hamilton} are:
+\begin{equation}
+j_1 k_2 - k_1 j_2 \quad\text{(i-component)}, \quad
+k_1 i_2 - i_1 k_2 \quad\text{(j-component)}, \quad
+i_1 j_2 - j_1 i_2 \quad\text{(k-component)}
+\end{equation}
+Each cross term couples \emph{two different} imaginary axes. When
+only one imaginary axis is active ($i$ only, or $j$ only, or $k$ only),
+all cross terms vanish and the product is commutative. Non-commutativity
+requires interaction between at least two of $\{i, j, k\}$.
+\end{remark}
+
+%======================================================================
+\section{Emergent Non-Commutativity}
+\label{sec:emergence}
+%======================================================================
+
+\begin{theorem}[Non-commutativity is emergent]
+\label{thm:emergence}
+Let $S \subsetneq \{r, i, j, k\}$ be a proper subset of the four axes
+and $V_S = \{q \in V : q_m = 0 \text{ for } m \notin S\}$ the
+corresponding restriction. If $|S \cap \{i, j, k\}| \leq 1$, then
+the Hamilton product is commutative on $V_S$.
+\end{theorem}
+
+\begin{proof}
+If the active imaginary axes are $\{i\}$, $\{j\}$, or $\{k\}$ (or
+empty), then all cross terms in~\eqref{eq:hamilton} vanish (each
+cross term couples two distinct imaginary axes). The product reduces
+to real-times-real plus a single imaginary-squared term, which
+commutes.
+
+For zero imaginary axes ($S \subseteq \{r\}$): the product is
+$r_1 r_2$, trivially commutative.
+
+For one imaginary axis, say $S = \{r, i\}$: the product is
+$(r_1 r_2 - i_1 i_2, \; r_1 i_2 + i_1 r_2) = z_1 z_2$
+(complex multiplication), which is commutative.
+\end{proof}
+
+\begin{corollary}
+\label{cor:min-axes}
+The Hamilton product is non-commutative on $V_S$ if and only if
+$|S \cap \{i, j, k\}| \geq 2$.
+\end{corollary}
+
+\begin{proof}
+The ``only if'' direction is Theorem~\ref{thm:emergence}. For the
+``if'' direction: with two imaginary axes active, at least one cross
+term is nonzero. For example, with $i$ and $j$ active:
+$q_1 = (0, a, 0, 0)$, $q_2 = (0, 0, b, 0)$ gives
+$q_1 q_2 = (0, 0, 0, ab)$ while $q_2 q_1 = (0, 0, 0, -ab)$.
+\end{proof}
+
+\begin{remark}[Emergence as dimensional phenomenon]
+Non-commutativity is not present in any one- or two-dimensional
+restriction of the quaternionic logic. It emerges only when at least
+three dimensions are active (real plus two imaginary). This is
+analogous to the classical result that the only associative division
+algebras over $\mathbb{R}$ are $\mathbb{R}$ (1D, commutative),
+$\mathbb{C}$ (2D, commutative), and $\Hq$ (4D, non-commutative): the
+non-commutativity is a genuinely four-dimensional phenomenon that cannot
+be observed from any lower-dimensional shadow.
+
+In the semantic interpretation: imagining ($i$), verifying ($j$), and
+selecting ($k$) are each individually order-independent. It is only
+when \emph{two or more} of these processes interact that the order of
+operations begins to matter.
+\end{remark}
+
+%======================================================================
+\section{The Lattice Order Problem}
+\label{sec:obstruction}
+%======================================================================
+
+The results so far establish a monoid $(B^4, \cdot, \mathbf{1})$ with
+left and right residuals on the punctured ball. What is missing for a
+residuated lattice is a compatible lattice order.
+
+\begin{proposition}[No compatible total order]
+\label{prop:no-total-order}
+There is no total order $\leq$ on $\Hq$ such that $(\Hq, \leq)$ is a
+totally ordered group under Hamilton multiplication.
+\end{proposition}
+
+\begin{proof}
+In a totally ordered group, every square is non-negative:
+$a^2 \geq e$ (since either $a \geq e$ or $a^{-1} \geq e$, and
+$a^2 = a \cdot a \geq a \cdot e = a \geq e$ or
+$a^2 = (a^{-1})^{-2} \geq e$). But $i^2 = -1 < 1 = e$ in any
+order that makes $e$ the identity. Contradiction.
+\end{proof}
+
+\begin{theorem}[Component-wise order incompatibility]
+\label{thm:order-incompatibility}
+Let $\leq_V$ be the component-wise partial order on $V$. There is no
+subset $D \subseteq V$ containing $\mathbf{0}$ and $\mathbf{1}$ such
+that $(D, \leq_V, \cdot_{\Hq})$ is a residuated lattice---i.e., such
+that $D$ is closed under $\min$, $\max$, and $\cdot_{\Hq}$
+simultaneously.
+\end{theorem}
+
+\begin{proof}
+Suppose such $D$ exists. Since $\mathbf{0}, \mathbf{1} \in D$ and $D$
+is closed under $\min$ and $\max$, $D$ contains all elements of the
+form $(r, 0, 0, 0)$ for $r \in [0,1]$ (as $\max(\mathbf{0},
+\min(\mathbf{1}, (r, 0, 0, 0))) = (r, 0, 0, 0)$, taking
+$D$ to contain a generating set).
+
+For $D$ to be a non-trivial quaternionic lattice (not merely the real
+line), $D$ must contain some element $a = (r_a, i_a, 0, 0)$ with
+$i_a > 0$. Closure under Hamilton product requires
+$a^2 = (r_a^2 - i_a^2, \; 2 r_a i_a, \; 0, \; 0) \in D$. If
+$i_a > r_a$, then $\Real(a^2) = r_a^2 - i_a^2 < 0$, so
+$a^2 \notin V$ (the real component is negative). Thus $D$ cannot
+contain any element with $i_a > r_a$.
+
+But even restricting to $i_a \leq r_a$: closure under $\max$ with
+another element $b = (r_b, i_b, 0, 0)$ gives
+$\max(a, b) = (\max(r_a, r_b), \max(i_a, i_b), 0, 0)$, which can
+have $i > r$ (take $r_a < r_b$ and $i_a > i_b$ with $i_a > r_b$).
+So $D$ cannot be closed under both $\max$ and $\cdot_{\Hq}$ on $V$.
+\end{proof}
+
+\begin{remark}[The core tension]
+The lattice and the monoid pull in opposite directions:
+\begin{itemize}[nosep]
+\item The \emph{lattice} wants a positively-ordered bounded domain where
+  $\min$ and $\max$ are closed.
+\item The \emph{Hamilton monoid} wants a norm-bounded domain where the
+  signed cross terms can roam freely.
+\end{itemize}
+The component-wise order bounds each component independently; the
+Hamilton product couples them through signed cross terms. The
+incompatibility is structural: it arises from the \emph{minus signs}
+in the quaternion multiplication table ($i^2 = j^2 = k^2 = -1$),
+which are the same signs that produce non-commutativity. Removing them
+would make the product commutative (and component-wise), recovering the
+existing G-lattice.
+\end{remark}
+
+We now strengthen these negative results by ruling out four natural
+candidate orders on~$B^4$.
+
+\begin{theorem}[Cone impossibility]
+\label{thm:cone-impossibility}
+There is no proper cone $C \subsetneq \Hq \setminus \{0\}$ that is
+invariant under both left and right multiplication by unit quaternions.
+Consequently, no bi-invariant partial order on $\Hq$ can be defined via
+a positive cone.
+\end{theorem}
+
+\begin{proof}
+The group $\SU$ acts on $\Hq$ by conjugation: $q \mapsto uq\bar{u}$
+for $|u| = 1$. This action preserves $\Real(q)$ and acts as $\mathrm{SO}(3)$
+on $\Imag(q)$. Since $\mathrm{SO}(3)$ acts transitively on $S^2$,
+the conjugation orbit of any pure imaginary unit quaternion is all of
+$S^2 \subset \Imag(\Hq)$.
+
+Suppose $C$ is a cone invariant under conjugation (a necessary
+condition for bi-invariance). If $C$ contains any $q$ with
+$\Imag(q) \neq 0$, then $C$ contains the entire conjugation orbit of
+$q$, which includes elements with imaginary part pointing in every
+direction of $S^2$. In particular, $C$ contains both $q'$ and elements
+with opposite imaginary part, so $C$ contains elements in every open
+half-space of $\Hq$. Thus $C$ cannot be a proper cone (a proper cone
+is contained in a closed half-space).
+
+For left-invariance specifically: if $q \in C$ and $|u| = 1$, then
+$uq \in C$. But $\{uq : u \in S^3\}$ sweeps out the sphere of radius
+$|q|$ in $\Hq$, so $C$ contains the full sphere $S^3_{|q|}$, which is
+not contained in any proper cone.
+\end{proof}
+
+\begin{theorem}[$Q_8$ order impossibility]
+\label{thm:q8-impossibility}
+No non-trivial bi-invariant partial order exists on the quaternion
+group $Q_8 = \{\pm 1, \pm i, \pm j, \pm k\}$.
+\end{theorem}
+
+\begin{proof}
+Suppose $\leq$ is a partial order on $Q_8$ such that $a \leq b$
+implies $ca \leq cb$ and $ac \leq bc$ for all $c \in Q_8$. Take any
+$a \neq b$ with $a < b$. Left-multiplying by $c$ gives $ca < cb$;
+right-multiplying gives $ac < bc$. We generate the \emph{order closure}:
+the smallest partial order containing $a < b$ and closed under left
+and right multiplication.
+
+We claim this closure always produces a cycle.
+
+\emph{Explicit example}: seed $1 < i$. Left-multiply by $i$:
+$i < i^2 = -1$. Left-multiply $i < -1$ by $i$: $-1 < i \cdot (-1) = -i$.
+Left-multiply $-1 < -i$ by $i$: $-i < i \cdot (-i) = 1$. The closure
+now contains $1 < i < -1 < -i < 1$, a cycle contradicting
+antisymmetry.
+
+\emph{General argument}: for any $a \neq b$ with $a < b$,
+left-multiply by $c = ba^{-1}$ (a unit): $ca < cb$, i.e.,
+$b < cb$. The map $x \mapsto cx$ is a permutation of $Q_8$ of order
+dividing~4 (every non-identity element of $Q_8$ has order~4). So
+iterating gives $b < cb < c^2 b < c^3 b < c^4 b = b$, a
+contradictory cycle. Exhaustive computation confirms that all $56$
+ordered pairs $(a, b)$ with $a \neq b$ in $Q_8$ produce cycles within
+4~steps.
+\end{proof}
+
+\begin{proposition}[Real-dominant subcone non-closure]
+\label{prop:subcone}
+For $\tau \in (0, 1)$, define the real-dominant subcone
+$V_\tau = \{q \in B^4 : \Real(q) \geq \tau \cdot |q|\}$.
+Then $V_\tau$ is not closed under the Hamilton product.
+\end{proposition}
+
+\begin{proof}
+Take $q_1, q_2 \in S^3 \cap V_\tau$ with $\Real(q_i) = \tau$ and
+imaginary parts aligned: $\Imag(q_1) = \Imag(q_2) = v$ with
+$|v| = \sqrt{1 - \tau^2}$. Then:
+\[
+\Real(q_1 q_2) = \tau^2 - |\Imag(q_1)||\Imag(q_2)|\cos 0
+  = \tau^2 - (1 - \tau^2) = 2\tau^2 - 1
+\]
+For $q_1 q_2 \in V_\tau$ we need $\Real(q_1 q_2) \geq \tau |q_1 q_2|
+= \tau$, so we need $2\tau^2 - 1 \geq \tau$, equivalently
+$2\tau^2 - \tau - 1 \geq 0$, which factors as $(2\tau + 1)(\tau - 1)
+\geq 0$. Since $\tau > 0$, this holds only for $\tau \geq 1$. Thus
+$V_\tau$ is not closed for any $\tau < 1$, and $V_1$ is the real line.
+\end{proof}
+
+\begin{proposition}[Norm-order collapse]
+\label{prop:norm-collapse}
+Define the \emph{norm order} on $B^4$ by $a \preceq b$ iff
+$|a| \leq |b|$. Then $(B^4, \preceq, \cdot)$ satisfies:
+\begin{enumerate}[nosep]
+\item Monotonicity: $a \preceq b$ implies $c \cdot a \preceq c \cdot b$
+  and $a \cdot c \preceq b \cdot c$.
+\item The quotient $B^4 / {\sim}$ (where $a \sim b$ iff $|a| = |b|$)
+  is isomorphic to $([0,1], \leq, \cdot_{\mathrm{prod}})$, the
+  product BL-algebra on $[0,1]$.
+\end{enumerate}
+Consequently, the norm order erases all quaternionic structure: the
+non-commutativity, axis coupling, and four-dimensionality are lost in
+the quotient.
+\end{proposition}
+
+\begin{proof}
+(1) follows from $|c \cdot a| = |c||a| \leq |c||b| = |c \cdot b|$.
+
+(2) The map $\pi \colon B^4 \to [0,1]$, $q \mapsto |q|$ is a surjective
+monoid homomorphism: $\pi(q_1 q_2) = |q_1 q_2| = |q_1||q_2|
+= \pi(q_1) \cdot \pi(q_2)$, and $\pi(\mathbf{1}) = 1$. It is
+order-preserving by definition of $\preceq$. The fibers $\pi^{-1}(r)$
+are the 3-spheres $r \cdot S^3$ (for $r > 0$), on which $\preceq$
+cannot distinguish elements. Thus $B^4/{\sim} \cong [0,1]$ as an
+ordered monoid, and the product $\cdot_{\mathrm{prod}}$ on $[0,1]$
+has the standard residuum $a \to b = \min(1, b/a)$.
+\end{proof}
+
+\subsection{Sphere exclusion}
+
+The integrality condition (monoid identity = lattice top) imposes a
+further constraint.
+
+\begin{proposition}[Sphere exclusion]
+\label{prop:sphere-exclusion}
+Let $(D, \leq, \cdot)$ be an integral residuated lattice with
+$D \subseteq B^4$, monoid identity $\mathbf{1} = (1,0,0,0)$, and
+$\mathbf{1}$ as lattice top. If $a \in D \cap S^3$ and
+$a^{-1} \in D$, then $a = \mathbf{1}$.
+\end{proposition}
+
+\begin{proof}
+Since $\mathbf{1}$ is the lattice top, $a \leq \mathbf{1}$ for all
+$a \in D$. Left-multiply by $a^{-1}$:
+$a^{-1} \cdot a \leq a^{-1} \cdot \mathbf{1}$, i.e.,
+$\mathbf{1} \leq a^{-1}$. But $a^{-1} \leq \mathbf{1}$ (top).
+By antisymmetry, $a^{-1} = \mathbf{1}$, hence $a = \mathbf{1}$.
+\end{proof}
+
+\begin{corollary}
+\label{cor:sphere-exclusion}
+In any integral residuated lattice on $D \subseteq B^4$ with Hamilton
+product, if $D$ is closed under inversion on $S^3$, then
+$D \cap S^3 = \{\mathbf{1}\}$. The domain can contain at most the
+identity on the unit sphere; all other elements must have
+$|q| < 1$.
+\end{corollary}
+
+\subsection{The quaternionic trilemma}
+
+The six results above---cone impossibility
+(Theorem~\ref{thm:cone-impossibility}), $Q_8$ impossibility
+(Theorem~\ref{thm:q8-impossibility}), subcone non-closure
+(Proposition~\ref{prop:subcone}), norm-order collapse
+(Proposition~\ref{prop:norm-collapse}), component-wise incompatibility
+(Theorem~\ref{thm:order-incompatibility}), and sphere exclusion
+(Proposition~\ref{prop:sphere-exclusion})---eliminate every natural
+family of lattice orders on $B^4$.
+
+\begin{theorem}[Quaternionic trilemma]
+\label{thm:trilemma}
+Let $T = \cdot_{\Hq}$ be the Hamilton product. Consider the three
+properties: \textup{(a)}~associativity, \textup{(b)}~non-commutativity
+arising from quaternionic cross-term coupling,
+\textup{(c)}~compatible lattice order.
+\begin{enumerate}[label=(\Roman*),nosep]
+\item \textup{($V$-domains.)} For any $D \subseteq V$ containing
+  $\mathbf{0}$ and $\mathbf{1}$ and closed under~$T$, at most two
+  of \textup{(a)--(c)} hold simultaneously
+  \textup{(}Theorem~\ref{thm:trilemma-V}\textup{)}.
+\item \textup{($B^4$, equal norms.)} For orthogonal unit purely
+  imaginary $\hat{u}, \hat{v}$ and $r \in (0,1)$, the sub-monoid
+  $\langle r\hat{u}, r\hat{v}\rangle \cup \{\mathbf{0}, \mathbf{1}\}$
+  satisfies \textup{(a)} and \textup{(b)} but admits no compatible
+  lattice order \textup{(}Theorem~\ref{thm:trilemma-B4}\textup{)}.
+\end{enumerate}
+The equal-norm condition in \textup{(II)} is sharp: when $|a| \neq |b|$,
+compatible monotone lattice orders exist
+\textup{(}Remark~\ref{rem:sharpness}\textup{)}.
+\end{theorem}
+
+\begin{proof}
+(I) is Theorem~\ref{thm:trilemma-V}; (II) is
+Theorem~\ref{thm:trilemma-B4}. Sharpness is established by
+computational verification in Remark~\ref{rem:sharpness}.
+\end{proof}
+
+The six elimination results complement the direct proofs:
+
+\begin{theorem}[Elimination of natural orders]
+\label{thm:elimination}
+For the Hamilton monoid $(B^4, \cdot, \mathbf{1})$, properties
+(a) and (b) hold, and the following families of orders fail to
+provide~(c):
+\begin{enumerate}[nosep]
+\item Positive-cone orders: no proper bi-invariant cone exists
+  (Theorem~\ref{thm:cone-impossibility}).
+\item Finite subgroup orders: $Q_8$ admits no bi-invariant partial
+  order (Theorem~\ref{thm:q8-impossibility}).
+\item Subcone orders: no real-dominant subcone $V_\tau$ with
+  $\tau < 1$ is closed (Proposition~\ref{prop:subcone}).
+\item Norm-based orders: the norm order collapses to $[0,1]$, erasing
+  non-commutativity (Proposition~\ref{prop:norm-collapse}).
+\item Component-wise order: incompatible with Hamilton closure
+  (Theorem~\ref{thm:order-incompatibility}).
+\item Inversion-closed orders: the domain can meet $S^3$ only at
+  $\{\mathbf{1}\}$ (Proposition~\ref{prop:sphere-exclusion}).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Each item is proved in the cited result. The theorem collects them
+to show that six independent approaches to constructing~(c) all fail
+for the Hamilton monoid.
+\end{proof}
+
+\begin{remark}[Achievable pairs]
+\label{rem:pairs}
+Properties (a)$+$(b) are achieved by the Hamilton product on $B^4$.
+Properties (a)$+$(c) are achieved by the G-lattice of~\citet{p11}
+(component-wise min with the standard order on $V$). Properties
+(b)$+$(c) are achieved by the Hamilton product on sub-monoids
+$\langle r_1 \hat{u}, r_2 \hat{v}\rangle \cup \{\mathbf{0},
+\mathbf{1}\}$ with $r_1 \neq r_2$: the multiplication is
+non-commutative and a compatible monotone lattice order exists
+(Remark~\ref{rem:sharpness}). Thus every pair of properties is
+individually achievable; only the triple is impossible.
+\end{remark}
+
+\begin{remark}[Sharpness of the equal-norm condition]
+\label{rem:sharpness}
+The equal-norm hypothesis $|a| = |b|$ in
+Theorem~\ref{thm:trilemma-B4} is essential, not merely a simplifying
+assumption. When $|a| = |b| = r$, the identity $a^2 = b^2 = -r^2$
+collapses four candidate level-2 products to three ($a^2, ab, ba$),
+and the substitution $a \cdot b^2 = a \cdot a^2 = a^3$ creates a
+cyclic swap among level-3 elements that forces a contradiction.
+
+When $|a| \neq |b|$, $a^2 \neq b^2$ and level~2 has four distinct
+elements. The chain $a^3 \leq a^2 b \leq a b^2$ no longer closes to
+a cycle, because $a b^2 \neq a^3$. Computational verification
+confirms that the sub-monoid
+$\langle r_1 \hat{u}, r_2 \hat{v}\rangle \cup \{\mathbf{0},
+\mathbf{1}\}$ with $r_1 \neq r_2$ admits a compatible monotone
+lattice order at every tested depth (up to depth~5, with 18
+elements). The solver finds satisfying assignments in very few
+backtracking nodes, indicating that the lattice order is not
+marginally feasible but genuinely unconstrained.
+\end{remark}
+
+%======================================================================
+\section{The Alpha Bridge}
+\label{sec:alpha}
+%======================================================================
+
+The tension between the commutative lattice (closed, monotone, no
+coupling) and the Hamilton product (open, non-monotone, full coupling)
+suggests a parameterized interpolation.
+
+\begin{definition}[Alpha-parameterized product]
+\label{def:alpha}
+For $\alpha \in [0,1]$ and $q_1, q_2 \in V$, define:
+\begin{equation}
+\label{eq:alpha}
+(q_1 \cdot_\alpha q_2) = \begin{pmatrix}
+  r_1 r_2 - \alpha(i_1 i_2 + j_1 j_2 + k_1 k_2) \\
+  r_1 i_2 + i_1 r_2 + \alpha(j_1 k_2 - k_1 j_2) \\
+  r_1 j_2 + j_1 r_2 + \alpha(k_1 i_2 - i_1 k_2) \\
+  r_1 k_2 + k_1 r_2 + \alpha(i_1 j_2 - j_1 i_2)
+\end{pmatrix}
+\end{equation}
+At $\alpha = 0$, the cross terms vanish and the product becomes:
+$(q_1 \cdot_0 q_2)_r = r_1 r_2$ and
+$(q_1 \cdot_0 q_2)_m = r_1 q_{2,m} + q_{1,m} r_2$ for
+$m \in \{i, j, k\}$. This is the \emph{diagonal part} of the Hamilton
+product---the real component multiplies while the imaginary components
+combine linearly, weighted by the real parts. It is \emph{not} the
+component-wise (Hadamard) product $q_{1,m} q_{2,m}$, nor the
+component-wise min used in the G-lattice of~\citet{p11}.
+At $\alpha = 1$, the product is the full Hamilton
+product~\eqref{eq:hamilton}.
+\end{definition}
+
+\begin{proposition}[Properties of the $\alpha$-family]
+\label{prop:alpha}
+\leavevmode
+\begin{enumerate}[nosep]
+\item \textbf{Identity}: $q \cdot_\alpha \mathbf{1} = \mathbf{1} \cdot_\alpha q = q$
+  for all $\alpha \in [0,1]$.
+\item \textbf{Annihilator}: $q \cdot_\alpha \mathbf{0} = \mathbf{0} \cdot_\alpha q
+  = \mathbf{0}$ for all $\alpha$.
+\item \textbf{Associativity}: $\cdot_\alpha$ is associative if and only
+  if $\alpha \in \{0, 1\}$.
+\item \textbf{Commutativity}: $\cdot_\alpha$ is commutative if and only
+  if $\alpha = 0$.
+\item \textbf{Specialization}: Under any restriction that sets two or
+  more imaginary axes to zero, $\cdot_\alpha$ reduces to the same
+  operation for all $\alpha$ (the cross terms vanish).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1)--(2) follow from direct substitution: the cross terms vanish when
+one factor is $\mathbf{1}$ or $\mathbf{0}$.
+
+(3)~At $\alpha = 0$: direct computation gives
+$((q_1 \cdot_0 q_2) \cdot_0 q_3)_r = (r_1 r_2) r_3 = r_1 (r_2 r_3)
+= (q_1 \cdot_0 (q_2 \cdot_0 q_3))_r$ and, for each imaginary axis~$m$,
+$((q_1 \cdot_0 q_2) \cdot_0 q_3)_m
+= (r_1 r_2) q_{3,m} + (r_1 q_{2,m} + q_{1,m} r_2) r_3
+= r_1 r_2 q_{3,m} + r_1 q_{2,m} r_3 + q_{1,m} r_2 r_3
+= r_1 (r_2 q_{3,m} + q_{2,m} r_3) + q_{1,m} (r_2 r_3)
+= (q_1 \cdot_0 (q_2 \cdot_0 q_3))_m$. At $\alpha = 1$: associativity
+is inherited from~$\Hq$.
+
+For $0 < \alpha < 1$: the $\alpha$-product is a linear interpolation
+between two different associative operations. Linear interpolation of
+associative operations is generically non-associative. To verify: take
+$a = (0, 0.5, 0, 0)$, $b = (0, 0, 0.5, 0)$, $c = (0.5, 0, 0, 0.5)$
+and compute $(a \cdot_\alpha b) \cdot_\alpha c$ vs.\
+$a \cdot_\alpha (b \cdot_\alpha c)$ for $\alpha = 0.5$. The
+intermediate products generate terms in $\alpha^2$ that do not cancel.
+
+(4)~The cross terms $j_1 k_2 - k_1 j_2$, etc., are antisymmetric in
+$(q_1, q_2)$. For $\alpha > 0$, they contribute non-symmetrically; for
+$\alpha = 0$, they vanish.
+
+(5)~With two or more imaginary axes zeroed out, every cross term in
+\eqref{eq:alpha} contains a factor from a zeroed axis and vanishes.
+\end{proof}
+
+\begin{remark}[Interpretation]
+The parameter $\alpha$ controls the degree of \textbf{epistemic
+coupling} between the four axes:
+\begin{itemize}[nosep]
+\item $\alpha = 0$: knowing ($r$), imagining ($i$), verifying ($j$),
+  and selecting ($k$) are independent processes. The conjunction is
+  component-wise.
+\item $\alpha = 1$: the four processes interact through the full
+  quaternionic structure. Imagining and verifying generate selection
+  ($ij = k$). The order of operations matters.
+\end{itemize}
+The bridge is continuous but not algebraically smooth: associativity
+holds only at the two endpoints. The loss of associativity for
+intermediate $\alpha$ means that a gradual transition from commutative
+to non-commutative logic is not algebraically coherent---the jump must
+be discrete.
+\end{remark}
+
+%======================================================================
+\section{Discussion}
+\label{sec:discussion}
+%======================================================================
+
+\subsection{Summary of the landscape}
+
+Table~\ref{tab:landscape} summarizes which properties are satisfied by
+each construction.
+
+\begin{table}[H]
+\centering
+\caption{Properties of candidate constructions. The trilemma manifests
+as the impossibility of all seven checkmarks in any single column.}
+\label{tab:landscape}
+\small
+\begin{tabularx}{\textwidth}{@{}l *{6}{>{\centering\arraybackslash}X} @{}}
+\toprule
+\textbf{Property}
+  & \textbf{Min/$V$}
+  & \textbf{Ham./$V$}
+  & \textbf{Ham./$B^4$}
+  & \textbf{Norm-ord.}
+  & \textbf{$\alpha{=}0$}
+  & \textbf{$\alpha{\in}(0,1)$} \\
+\midrule
+Identity      & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+Annihilator   & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+Associative   & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\times$     \\
+Closed        & $\checkmark$ & $\times$     & $\checkmark$ & $\checkmark$ & $\checkmark$ & partial      \\
+Monotone      & $\checkmark$ & $\times$     & $\times$     & $\checkmark$ & $\checkmark$ & $\times$     \\
+Commutative   & $\checkmark$ & $\times$     & $\times$     & eff.\ $\checkmark$ & $\checkmark$ & $\times$ \\
+Axis coupling & $\times$     & $\checkmark$ & $\checkmark$ & $\times$     & $\times$     & partial      \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent The column ``Norm-ord.'' refers to the norm-order RL of
+Proposition~\ref{prop:norm-collapse}: the Hamilton product is formally
+non-commutative, but the order quotients it to the commutative
+$[0,1]$ product algebra (``effectively commutative'').
+
+The table confirms the trilemma: every column with axis coupling
+($\checkmark$ in the last row) lacks monotonicity, and every column
+with both associativity and monotonicity lacks axis coupling.
+
+\subsection{Comparison with known structures}
+
+\begin{table}[H]
+\centering
+\caption{The Hamilton product in the taxonomy of monoidal operations.}
+\label{tab:comparison}
+\begin{tabularx}{\textwidth}{@{}lYY@{}}
+\toprule
+\textbf{Structure} & \textbf{Properties} & \textbf{Relation to this work} \\
+\midrule
+t-norm \citep{hajek1998} & Commutative, associative, monotone on
+  $[0,1]$ & Min t-norm is the current G-lattice conjunction \\
+psBL-algebra \citep{hajek2003} & Non-commutative, two residuals on
+  $[0,1]$ & Target structure; our monoid satisfies the monoid axioms
+  but not the lattice axioms \\
+Quantale \citep{mulvey1986} & Complete lattice + associative monoid &
+  The unit ball monoid is a candidate if a compatible lattice order is
+  found \\
+Lambek calculus \citep{lambek1958} & Non-commutative conjunction
+  in linguistics & Shares the two-residual structure; our cross terms
+  give it geometric content \\
+Quaternionic fuzzy sets \citep{dai2023} & Min/max on
+  quaternion-valued memberships & No t-norm, no residuum;
+  compatible with but independent of this work \\
+Lattice-ordered groups \citep{kopytov1994} & Lattice + group;
+  non-abelian examples exist on free groups & $\Hq^\times$ cannot be
+  lattice-ordered: Theorem~\ref{thm:cone-impossibility} blocks the
+  positive cone. Our monoid is not a group ($B^4$ has no inverses for
+  $|q| < 1$), so the l-group theory does not directly apply \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Scope of the obstruction}
+\label{sec:scope}
+
+Theorem~\ref{thm:elimination} eliminates six families of orders.
+The relationship between these eliminations and the sharp boundary
+of Theorem~\ref{thm:trilemma} is characterised in
+Remark~\ref{rem:sharpness}: the trilemma holds precisely under the
+equal-norm condition $|a| = |b|$. Three further observations
+sharpen the scope.
+
+\begin{proposition}[No finite closed NC domain]
+\label{prop:finite-domain}
+Let $D \subset \mathrm{int}(B^4) \cup \{\mathbf{0}, \mathbf{1}\}$
+be finite and closed under Hamilton product. Then
+$D \subseteq \{\mathbf{0}, \mathbf{1}\}$.
+\end{proposition}
+
+\begin{proof}
+Suppose $d \in D \setminus \{\mathbf{0}, \mathbf{1}\}$.
+Then $d \in \mathrm{int}(B^4)$, so $0 < |d| < 1$.  The sequence
+$d, d^2, d^3, \ldots$ lies in $D$ by closure, and
+$|d^n| = |d|^n$ (norm multiplicativity of~$\Hq$). Since
+$0 < |d| < 1$, the norms $|d|^n$ are pairwise distinct, so the
+elements $d^n$ are pairwise distinct---an infinite subset of the
+finite set~$D$, a contradiction.
+\end{proof}
+
+Consequently, any finite domain containing non-commuting elements
+$a, b$ with $|a|, |b| < 1$ is not closed under the Hamilton product,
+so the operation $T \colon D \times D \to D$ is not well-defined.
+Combined with the $Q_8$ impossibility
+(Theorem~\ref{thm:q8-impossibility}), which handles the boundary
+case $|q| = 1$: no finite domain supports the trilemma triple.
+
+A much stronger result holds for the natural domain
+$V = [0,1] \times [-1,1]^3$ of the quaternionic logic.
+
+\begin{theorem}[Angular accumulation]
+\label{thm:angular}
+Let $q \in V$ with $\Imag(q) \neq 0$. Then there exists a finite
+$N$ such that $q^N \notin V$.
+\end{theorem}
+
+\begin{proof}
+Write $q = |q|(\cos\theta + \sin\theta\,\hat{u})$ where
+$\hat{u} = \Imag(q)/|\Imag(q)|$ is a unit pure imaginary quaternion
+and $\theta = \arccos(\Real(q)/|q|) \in (0, \pi/2]$ (the bounds
+follow from $\Real(q) \geq 0$ and $|\Imag(q)| > 0$). By
+De Moivre's theorem for quaternions ($\hat{u}^2 = -1$ gives the
+same exponential structure as complex numbers):
+\[
+  q^n = |q|^n\bigl(\cos(n\theta) + \sin(n\theta)\,\hat{u}\bigr).
+\]
+In particular, $\Real(q^n) = |q|^n \cos(n\theta)$.
+
+Since $\theta > 0$, there exists a smallest $N$ with
+$N\theta > \pi/2$; explicitly, $N \leq \lceil\pi/(2\theta)\rceil + 1$.
+At $n = N$: if $\cos(N\theta) < 0$, then $\Real(q^N) < 0$, so
+$q^N \notin V$. If $\cos(N\theta) = 0$ (i.e.\ $N\theta = \pi/2$
+exactly), then $\cos((N{+}1)\theta) = -\sin\theta < 0$, so
+$q^{N+1} \notin V$.
+\end{proof}
+
+\begin{corollary}[Only commutative sub-monoids of $V$]
+\label{cor:commutative-submonoid}
+Every sub-monoid of $(V, \cdot_{\Hq})$ contained in $V$ is
+commutative. That is: if $D \subseteq V$ is closed under the
+Hamilton product and contains $\mathbf{1}$, then $ab = ba$ for all
+$a, b \in D$.
+\end{corollary}
+
+\begin{proof}
+Suppose $d \in D$ has $\Imag(d) \neq 0$. By closure, $d^n \in D
+\subseteq V$ for all $n \geq 1$. But Theorem~\ref{thm:angular}
+gives $d^N \notin V$ for some finite $N$, a contradiction. So every
+$d \in D$ is real: $D \subseteq \{(r,0,0,0) : r \in [0,1]\}$.
+Real quaternions commute.
+\end{proof}
+
+\begin{theorem}[Quaternionic trilemma for $V$-domains]
+\label{thm:trilemma-V}
+Let $D \subseteq V$ contain $\mathbf{0}$ and $\mathbf{1}$, and let
+$T \colon D \times D \to D$ be the Hamilton product restricted
+to~$D$. Then at most two of \{(a)~associativity,
+(b)~non-commutativity, (c)~compatible lattice order\} hold.
+\end{theorem}
+
+\begin{proof}
+Condition (c) requires $T \colon D \times D \to D$ to be
+well-defined, hence $D$ must be closed under $T$.
+Corollary~\ref{cor:commutative-submonoid} then forces $D$ to be
+commutative, contradicting~(b).
+\end{proof}
+
+The trilemma is therefore a \emph{theorem} on the natural domain
+$V$ of the quaternionic logic. The mechanism is angular entropy
+production: each non-real element carries an angle
+$\theta = \arccos(\Real(q)/|q|) > 0$, and iterated multiplication
+accumulates this angle linearly ($n\theta$). The boundary $\Real
+\geq 0$ of $V$ can absorb at most $\pi/2$ radians of angular
+entropy; beyond this threshold the system exits $V$. The
+non-commutativity and the boundary violation share the same algebraic
+root: the relation $\hat{u}^2 = -1$ for pure imaginary unit
+quaternions.
+
+A stronger result holds for the full ball $B^4$, where powers remain
+in $B^4$ and the angular accumulation argument does not apply.
+The obstruction shifts from closure failure to a lattice-theoretic
+incompatibility within the non-commutative sub-monoid itself.
+
+\begin{proposition}[Level-2 incomparability in $B^4$]
+\label{prop:level2-incomparable}
+Let $r \in (0,1)$, $a = ri$, $b = rj$, and let $\leq$ be any
+partial order on $M = \langle a, b \rangle \cup \{\mathbf{0},
+\mathbf{1}\}$ with $\mathbf{0}$ as bottom, $\mathbf{1}$ as top,
+and the Hamilton product monotone on both sides. Then:
+\begin{enumerate}[label=\textup{(\alph*)},nosep]
+\item $a \| b$ \textup{(}the generators are incomparable\textup{)};
+\item $a^2$, $ab$, and $ba$ are pairwise incomparable.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\textbf{(a)} Suppose $a \leq b$. Left-multiply by $a$:
+$a^2 \leq ab$, i.e.\ $-r^2 \leq r^2k$. Right-multiply by $b$:
+$ab \leq b^2$, i.e.\ $r^2k \leq -r^2$. Together:
+$r^2k = -r^2$, which is false. The case $b \leq a$ is symmetric
+(yielding $-r^2k = -r^2$).
+
+\textbf{(b)} We show the case $a^2 \leq ab$ in detail; the
+remaining five are analogous.
+
+Suppose $a^2 \leq ab$. Left-multiply by $a$: $a^3 \leq a^2 b$,
+i.e.\ $-r^3 i \leq -r^3 j$. Right-multiply by $b$:
+$a^2 b \leq ab^2 = a^3$, i.e.\ $-r^3 j \leq -r^3 i$.
+By antisymmetry, $-r^3 i = -r^3 j$, contradicting $i \neq j$.
+In each of the six cases, two applications of monotonicity
+(one left, one right multiplication by generators) produce a cycle
+$p \leq q \leq p$ between distinct level-3 quaternions. The full
+case analysis is verified computationally in the supplementary
+script \texttt{b4\_proof\_verify.py}.
+\end{proof}
+
+\begin{theorem}[Lattice obstruction for $B^4$]
+\label{thm:trilemma-B4}
+Let $\hat{u}, \hat{v}$ be orthogonal unit purely imaginary
+quaternions and $r \in (0,1)$. The sub-monoid
+$M = \langle r\hat{u},\, r\hat{v} \rangle
+\cup \{\mathbf{0},\,\mathbf{1}\}$
+of $(B^4, \cdot_{\Hq})$ admits no partial order $\leq$ satisfying
+simultaneously:
+\begin{enumerate}[label=\textup{(\roman*)},nosep]
+\item $\mathbf{0}$ is bottom and $\mathbf{1}$ is top;
+\item $x \leq y$ implies $zx \leq zy$ and $xz \leq yz$ for all
+  $z \in M$;
+\item $(M, \leq)$ is a lattice.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By $\SU$ conjugation (which preserves norms, products, and the
+order structure), we may assume $\hat{u} = i$, $\hat{v} = j$,
+so $a = ri$ and $b = rj$. The products $a^2 = b^2 = -r^2$,
+$ab = r^2 k$, $ba = -r^2 k$ are pairwise distinct.
+
+\emph{Forced bounds.} From $0 \leq a, b \leq 1$ and (ii):
+for any word $w = w_1 w_2 \cdots w_n$ with $w_i \in \{a, b\}$ and
+$n \geq 2$, induction on $n$ using $w_n \leq 1$ gives
+$w \leq w_1 w_2$. In particular, every element of $M$ at level
+$\geq 3$ is below its two-generator prefix in $\{a^2, ab, ba\}$.
+
+\emph{Upper bounds of $\{a^2, ba\}$.} We claim that the only
+elements of $M$ above both $a^2$ and $ba$ are $\{a, b, 1\}$.
+
+Level~1: $a \geq a^2$ (from $a \leq 1$, multiply by $a$) and
+$a \geq ba$ (from $b \leq 1$, right-multiply by $a$). Similarly
+$b \geq a^2$ (since $a^2 = b^2 \leq b$) and $b \geq ba$
+(from $a \leq 1$, left-multiply by $b$).
+
+Level~2: any of $ab \geq a^2$, $ba \geq a^2$, or $a^2 \geq ba$
+contradicts Proposition~\ref{prop:level2-incomparable}(b).
+
+Level~$\geq 3$: if $w \geq a^2$ for a word of length $n \geq 3$,
+then $a^2 \leq w \leq w_1 w_2$, forcing $a^2 \leq w_1 w_2$.
+Proposition~\ref{prop:level2-incomparable}(b) excludes
+$w_1 w_2 \in \{ab, ba\}$, so $w_1 w_2 = a^2$, giving
+$w = a^2$ by antisymmetry. But $|w| = r^n < r^2 = |a^2|$ for
+$n \geq 3$, so $w \neq a^2$---a contradiction.
+
+$\mathbf{0}$: if $0 \geq a^2$ then $a^2 = 0$, contradicting
+$a^2 = -r^2 \neq 0$.
+
+\emph{No join.} The upper bounds of $\{a^2, ba\}$ in $M$ are
+exactly $\{a, b, 1\}$. Both $a$ and $b$ are minimal among these
+($a < 1$, $b < 1$, but $a \| b$ by
+Proposition~\ref{prop:level2-incomparable}(a)). Two incomparable
+minimal upper bounds admit no least upper bound. The join
+$a^2 \vee ba$ does not exist, so $(M, \leq)$ is not a lattice.
+\end{proof}
+
+The obstruction mechanism differs fundamentally from the $V$-domain
+case. In $V$, non-commutativity is eliminated entirely (every
+sub-monoid is commutative). In $B^4$, non-commutative sub-monoids
+exist---the Hamilton product is closed on $B^4$---but they cannot
+carry a compatible lattice order. The root cause is the same in
+both cases: the relation $\hat{u}^2 = -1$ for imaginary unit
+quaternions.
+
+The equal-norm hypothesis is sharp. When $|a| \neq |b|$, the
+collapse $a^2 = b^2$ that drives the cyclic swap at level~3 no
+longer holds, and compatible monotone lattice orders exist
+(Remark~\ref{rem:sharpness}). This delineates the precise
+boundary of the trilemma within $B^4$: non-commutativity and
+compatible order coexist exactly when the generators have unequal
+norms, restoring sufficient algebraic room for the lattice.
+
+\begin{remark}[Quaternionic specificity]
+\label{rem:specificity}
+The obstruction is specific to the quaternionic setting. The only
+normed division algebras over $\mathbb{R}$ are $\mathbb{R}$,
+$\mathbb{C}$, $\mathbb{H}$, and $\mathbb{O}$ (Hurwitz's theorem).
+Among these: $\mathbb{R}$ and $\mathbb{C}$ are commutative
+(no property~(b)), $\mathbb{O}$ is non-associative (no
+property~(a)), and $\mathbb{H}$ is the subject of this paper.
+Clifford algebras $\mathrm{Cl}(p,q)$ with $p + q \geq 3$ are not
+division algebras and thus admit zero divisors, precluding
+well-defined residuals. The trilemma is therefore a statement about
+the \emph{unique} algebraic setting---$\mathbb{H}$---where all
+three properties can be meaningfully posed.
+\end{remark}
+
+\begin{remark}[Residuation under the norm order]
+\label{rem:residuation-norm}
+One might ask whether the division-based residuals
+(Definition~\ref{def:implications}), truncated to $B^4$ via
+$a \to_L b = \pi_{B^4}(a^{-1} b)$, preserve the adjunction
+approximately. Proposition~\ref{prop:norm-collapse} settles this:
+the only monotone order on $B^4$ compatible with the Hamilton
+product is the norm order $|q_1| \leq |q_2|$, which collapses the
+lattice to $[0,1]$ with the product t-norm. Under this order, the
+residual is $|a| \to |b| = \min(1, |b|/|a|)$ and the adjunction
+holds \emph{exactly}---but the quaternionic structure beyond the
+norm is invisible. No intermediate approximation between full
+quaternionic residuation and norm collapse is available, because the
+monotonicity failures (Theorem~\ref{thm:monotonicity-failure}) are
+structural, not perturbative.
+\end{remark}
+
+%======================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+%======================================================================
+
+The Hamilton product of quaternions is a natural candidate for a
+non-commutative conjunction in quaternionic logic: it couples the four
+epistemic axes, satisfies bilateral identity and associativity, admits
+left and right implications with modus ponens, and reduces to standard
+commutative t-norms under every proper restriction. Its
+non-commutativity is emergent---a genuinely four-dimensional phenomenon
+absent from all lower-dimensional projections.
+
+The obstructions to a full residuated lattice are equally deep. Six
+independent impossibility results eliminate every natural family of
+lattice orders on $B^4$: bi-invariant cones (SU(2) transitivity),
+finite group orders ($Q_8$ exhaustive), real-dominant subcones
+(analytical bound), norm-based orders (1D collapse), component-wise
+orders (closure failure), and inversion-closed domains (sphere
+exclusion). These impossibilities hold in the equal-norm regime.
+For unequal-norm generators, the obstruction dissolves: every pair
+of properties is individually achievable (Remark~\ref{rem:pairs}),
+and the triple is impossible precisely when $|a| = |b|$.
+
+This elimination is not a deficiency of any particular
+construction---it traces to the defining relations
+$i^2 = j^2 = k^2 = -1$. The minus signs that produce
+non-commutativity are the same signs that break monotonicity---and,
+via De Moivre's theorem, the same signs that force iterated products
+out of the truth-value domain~$V$.
+
+The quaternionic trilemma is a theorem in two settings. For
+$V$-domains (Theorem~\ref{thm:trilemma-V}), the proof is that every
+sub-monoid of $V$ under the Hamilton product is commutative
+(Corollary~\ref{cor:commutative-submonoid}), because the angular
+entropy $\theta = \arccos(\Real(q)/|q|)$ of any non-real element
+accumulates linearly under iteration, exceeding $V$'s capacity
+$\pi/2$ in finitely many steps (Theorem~\ref{thm:angular}). For
+equal-norm sub-monoids of $B^4$
+(Theorem~\ref{thm:trilemma-B4}), the proof is that the collapse
+$a^2 = b^2$ forces pairwise incomparability of level-2 products
+and prevents the existence of joins. The equal-norm condition is
+sharp: unequal-norm sub-monoids admit compatible lattice orders
+(Remark~\ref{rem:sharpness}), so the trilemma boundary is
+precisely the locus $|a| = |b|$. Six family eliminations
+(Theorem~\ref{thm:elimination}) and nine computationally surveyed
+candidates (Table~\ref{tab:landscape}) independently corroborate
+the impossibility in the equal-norm regime.
+
+%======================================================================
+% BIBLIOGRAPHY
+%======================================================================
+
+\bibliographystyle{plainnat}
+
+\begin{thebibliography}{99}
+
+\bibitem[Ciungu(2006)]{ciungu2006}
+Ciungu, L.C. (2006).
+Classes of residuated lattices.
+\textit{Annals of the University of Craiova, Mathematics and Computer
+Science Series}, 33, 56--70.
+
+\bibitem[Dai(2023)]{dai2023}
+Dai, S. (2023).
+Quaternionic fuzzy sets.
+\textit{Axioms}, 12(5), 490.
+
+\bibitem[Esteva \& Godo(2001)]{esteva2001}
+Esteva, F. \& Godo, L. (2001).
+Monoidal t-norm based logic: towards a logic for left-continuous t-norms.
+\textit{Fuzzy Sets and Systems}, 124(3), 271--288.
+
+\bibitem[Galatos et~al.(2007)]{galatos2007}
+Galatos, N., Jipsen, P., Kowalski, T. \& Ono, H. (2007).
+\textit{Residuated Lattices: An Algebraic Glimpse at Substructural Logics}.
+Elsevier.
+
+\bibitem[H\'ajek(1998)]{hajek1998}
+H\'ajek, P. (1998).
+\textit{Metamathematics of Fuzzy Logic}.
+Kluwer.
+
+\bibitem[H\'ajek(2003)]{hajek2003}
+H\'ajek, P. (2003).
+Observations on non-commutative fuzzy logic.
+\textit{Soft Computing}, 7(1), 38--43.
+
+\bibitem[Kopytov \& Medvedev(1994)]{kopytov1994}
+Kopytov, V.M. \& Medvedev, N.Ya. (1994).
+\textit{The Theory of Lattice-Ordered Groups}.
+Kluwer.
+
+\bibitem[Lambek(1958)]{lambek1958}
+Lambek, J. (1958).
+The mathematics of sentence structure.
+\textit{American Mathematical Monthly}, 65(3), 154--170.
+
+\bibitem[Mulvey(1986)]{mulvey1986}
+Mulvey, C.J. (1986).
+\&.
+\textit{Rendiconti del Circolo Matematico di Palermo, Serie II,
+Supplemento}, 12, 99--104.
+
+\bibitem[Ornelas Brand(2026a)]{p11}
+Ornelas Brand, J.A. (2026).
+Quaternionic Logic: A G-Lattice Unifying Boolean and Fuzzy Frameworks.
+Manuscript in preparation.
+
+\bibitem[Restall(2000)]{restall2000}
+Restall, G. (2000).
+\textit{An Introduction to Substructural Logics}.
+Routledge.
+
+\end{thebibliography}
+
+\end{document}
