@@ -1,7 +1,7 @@
 {
-    "title": "Toward a Non-Commutative Residuated Lattice from Quaternion Multiplication",
+    "title": "Toward a Non-Commutative Residuated Lattice from Quaternion Multiplication (repository)",
     "version": "0.1.0",
-    "description": "Investigates whether the Hamilton product of quaternions can serve as a genuinely non-commutative conjunction for the G-lattice introduced in the companion paper. Positive results on V = [0,1] x [-1,1]^3: bilateral identity, bilateral annihilation, associativity, and left/right implications via quaternionic division both satisfying modus ponens. Under every commutative restriction (Boolean, fuzzy, modal), the two implications coincide and the product reduces to the standard commutative t-norm. Non-commutativity is shown to be emergent: it arises only in the full four-dimensional space, not in any proper restriction. Fundamental obstructions: the Hamilton product is not closed on V and is not monotone with respect to component-wise order; no total order on H is compatible with Hamilton multiplication; the component-wise lattice order and the Hamilton monoid cannot coexist on V; and on the full ball B^4, four independent impossibility results rule out any non-trivial compatible lattice order. Main theorem (Quaternionic Trilemma): for any monoidal operation on a subset of V, at most two of {associativity, non-commutativity, compatible lattice order} can hold simultaneously.",
+    "description": "Repository accompanying the paper 'Toward a Non-Commutative Residuated Lattice from Quaternion Multiplication' (Zenodo DOI 10.5281/zenodo.19561407). Contains LaTeX source, compiled PDF, and verification scripts for the Quaternionic Trilemma theorem. The paper investigates whether the Hamilton product of quaternions can serve as a genuinely non-commutative conjunction for the G-lattice introduced in the companion paper. Positive results on V = [0,1] x [-1,1]^3: bilateral identity, associativity, emergent non-commutativity. Fundamental obstructions: Hamilton product not closed/not monotone on V; no compatible total order on H; four independent impossibility results rule out any non-trivial compatible lattice order on B^4. Main theorem: for any monoidal operation on a subset of V, at most two of {associativity, non-commutativity, compatible lattice order} can hold simultaneously.",
     "creators": [
         {
             "name": "Ornelas Brand, J. Arturo",
@@ -9,8 +9,7 @@
             "email": "arturoornelas62@gmail.com"
         }
     ],
-    "upload_type": "publication",
-    "publication_type": "preprint",
+    "upload_type": "software",
     "access_right": "open",
     "license": "busl-1.1",
     "keywords": [
@@ -22,9 +21,8 @@
         "impossibility theorem",
         "algebraic logic",
         "monoidal operation",
-        "SU(2)",
-        "modus ponens",
-        "Quaternionic Trilemma"
+        "Quaternionic Trilemma",
+        "verification scripts"
     ],
     "related_identifiers": [
         {
@@ -33,8 +31,14 @@
             "resource_type": "software"
         },
         {
+            "identifier": "10.5281/zenodo.19561407",
+            "relation": "isSupplementTo",
+            "resource_type": "publication-preprint",
+            "scheme": "doi"
+        },
+        {
             "identifier": "10.5281/zenodo.19562014",
-            "relation": "continues",
+            "relation": "references",
             "resource_type": "publication-preprint",
             "scheme": "doi"
         }
