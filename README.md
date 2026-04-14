@@ -90,4 +90,6 @@ Concept DOI (all versions): [10.5281/zenodo.19561406](https://doi.org/10.5281/ze
 
 ## License
 
-See `LICENSE`.
+Business Source License 1.1 (BSL 1.1). Non-production use is permitted. On the Change Date (**2030-04-13**), or the fourth anniversary of the first publicly available distribution of a given version, whichever comes first, the work becomes available under the Change License (**Apache License, Version 2.0**).
+
+For alternative licensing arrangements, contact arturoornelas62@gmail.com. See [`LICENSE`](LICENSE) for full terms.
