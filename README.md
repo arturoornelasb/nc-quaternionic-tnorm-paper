@@ -2,6 +2,7 @@
 
 **Author:** J. Arturo Ornelas Brand — arturoornelas62@gmail.com
 **Paper DOI:** [10.5281/zenodo.19561407](https://doi.org/10.5281/zenodo.19561407) (v0.1.0, all versions: [10.5281/zenodo.19561406](https://doi.org/10.5281/zenodo.19561406))
+**Repository archive DOI:** [10.5281/zenodo.19563496](https://doi.org/10.5281/zenodo.19563496) (v0.1.0, all versions: [10.5281/zenodo.19563495](https://doi.org/10.5281/zenodo.19563495))
 **Status:** Published on Zenodo.
 
 ## Result
@@ -80,6 +81,8 @@ This paper extends the G-lattice framework established in:
 
 ## Citation
 
+Paper:
+
 ```
 Ornelas Brand, J.A. (2026). Toward a Non-Commutative Residuated Lattice
 from Quaternion Multiplication (v0.1.0). Zenodo.
@@ -87,6 +90,16 @@ https://doi.org/10.5281/zenodo.19561407
 ```
 
 Concept DOI (all versions): [10.5281/zenodo.19561406](https://doi.org/10.5281/zenodo.19561406)
+
+Repository archive:
+
+```
+Ornelas Brand, J.A. (2026). Toward a Non-Commutative Residuated Lattice
+from Quaternion Multiplication (repository) (v0.1.0). Zenodo.
+https://doi.org/10.5281/zenodo.19563496
+```
+
+Concept DOI (all versions): [10.5281/zenodo.19563495](https://doi.org/10.5281/zenodo.19563495)
 
 ## License
 
